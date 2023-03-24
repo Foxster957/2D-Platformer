@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+	[Header("Game Manager")]
+	public GameManager gameManager;
+	[Space]
+	
     [Header("Contact Filters")]
     public ContactFilter2D ground;
     public ContactFilter2D leftWall;
@@ -159,6 +163,14 @@ public class PlayerController : MonoBehaviour
         isJumping = true;
         jumpInputReleased = false;
     }
+
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+		if(collision.gameObject.CompareTag("Spikes"))
+		{
+			gameManager.PlayerDeath();
+		}
+	}
 
     void Update()
     {
